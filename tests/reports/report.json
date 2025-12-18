@@ -1,0 +1,133 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "user-registration-and-login-on-webshop-website;register-a-new-user-and-login-successfully",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Register a new user and login successfully",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 185867100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I navigate to webShop website",
+            "match": {
+              "location": "tests\\steps\\login\\LoginShopSteps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1136411000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "I click on the Log in link",
+            "match": {
+              "location": "tests\\steps\\login\\LoginShopSteps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 442479499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I click on Register link",
+            "match": {
+              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 362645100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I fill the registration form with valid data",
+            "match": {
+              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 881844699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should see registration success message",
+            "match": {
+              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 69620199
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 196681300
+            },
+            "embeddings": [
+              {
+                "data": "QnJvd3NlcjpjaHJvbWl1bSBWZXJzaW9uOiAxNDMuMC43NDk5LjQ=",
+                "mime_type": "text/plain"
+              },
+              {
+                "data": "U3RhdHVzOiBQQVNTRUQuIER1cmF0aW9uOjBz",
+                "mime_type": "text/plain"
+              }
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "@e2e",
+            "line": 1
+          },
+          {
+            "name": "@auth",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "user-registration-and-login-on-webshop-website",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "User registration and login on webShop website",
+    "tags": [
+      {
+        "name": "@e2e",
+        "line": 1
+      },
+      {
+        "name": "@auth",
+        "line": 1
+      }
+    ],
+    "uri": "tests\\feature\\login\\login-register.feature"
+  }
+]
