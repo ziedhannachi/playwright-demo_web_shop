@@ -16,5 +16,8 @@ export const COMPUTER_LOCATORS = {
   paymentInfoContinueBtn: '//input[@class="button-1 payment-info-next-step-button"]',
   confirmOrderBtn: '//input[@value="Confirm"]',
   orderConfirmation: '//strong[normalize-space()="Your order has been successfully processed!"]',
+
+  desktopItems: 'div.item-box',
+  desktopPrice: '.prices .price',
   
 };

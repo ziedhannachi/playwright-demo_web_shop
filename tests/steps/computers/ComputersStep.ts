@@ -1,6 +1,10 @@
 import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
 import { ComputersPage } from '../../pages/computers/ComputersPage';
 import { CustomWorld } from '../../utils/custom-world';
+
+
+let desktopPrices: number[] = [];
 
 /**
  * Computers / Desktops
@@ -73,3 +77,26 @@ Then('I should see the order confirmation', async function(this: CustomWorld) {
   const computersPage = new ComputersPage(page);
   await computersPage.verifyOrderConfirmation();
 });
+
+/**
+ * Compare price
+ */
+Then('I collect the prices of all displayed desktops', async function (this: CustomWorld) {
+  const computersPage = new ComputersPage(this.page!);
+  desktopPrices = await computersPage.getDesktopPrices();
+  console.log('Collected Prices:', desktopPrices);
+});
+
+Then('I verify that desktop prices can be compared', async function () {
+  const computersPage = new ComputersPage(this.page!);
+  await computersPage.verifyPricesAreComparable(desktopPrices);
+});
+
+Then('I select the cheapest desktop price', async function () {
+  const computersPage = new ComputersPage(this.page!);
+  const cheapestPrice = computersPage.getCheapestPrice(desktopPrices);
+
+  console.log('Cheapest desktop price:', cheapestPrice);
+  expect(cheapestPrice).toBeGreaterThan(0);
+});
+

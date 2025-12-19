@@ -26,13 +26,10 @@ export class ComputersPage extends BaseAction {
   public async verifyProductInCart(expectedProduct: string) {
     let productName = await this.getText(COMPUTER_LOCATORS.cartItemName);
     if (!productName) throw new Error('Product name not found in cart');
+    productName = productName.replace(/[\n\r\t]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
 
-    // Supprime tous les retours à la ligne, tabulations et espaces multiples
-    productName = productName.replace(/[\n\r\t]+/g, ' ')  // remplace retours à la ligne et tab par un espace
-      .replace(/\s+/g, ' ')      // remplace les espaces multiples par un seul
-      .trim();                   // supprime les espaces début/fin
-
-    // Affichage pour debug
     console.log('Normalized product name:', `"${productName}"`);
 
     expect(productName).toContain(expectedProduct);
@@ -51,7 +48,7 @@ export class ComputersPage extends BaseAction {
     await this.clickElements(COMPUTER_LOCATORS.checkoutButton);
   }
 
-    public async clickOnTermsOfServices() {
+  public async clickOnTermsOfServices() {
     await this.clickElements(COMPUTER_LOCATORS.termsOfService);
   }
 
@@ -67,5 +64,31 @@ export class ComputersPage extends BaseAction {
   public async verifyOrderConfirmation() {
     const text = await this.getText(COMPUTER_LOCATORS.orderConfirmation);
     expect(text).toContain('Your order has been successfully processed!');
+  }
+
+  public async getDesktopPrices(): Promise<number[]> {
+    await this.page.waitForSelector(COMPUTER_LOCATORS.desktopItems);
+
+    const prices = await this.page.$$eval(
+      `${COMPUTER_LOCATORS.desktopItems} ${COMPUTER_LOCATORS.desktopPrice}`,
+      elements => elements.map(el => {
+        const text = el.textContent?.trim() ?? '';
+        const raw = text.replace(/[^0-9.,]/g, '');
+        return parseFloat(raw.replace(',', '.'));
+      })
+    );
+    return prices;
+  }
+
+  public async verifyPricesAreComparable(prices: number[]) {
+    expect(prices.length).toBeGreaterThan(1);
+
+    prices.forEach(price => {
+      expect(price).toBeGreaterThan(0);
+    });
+  }
+
+  public getCheapestPrice(prices: number[]): number {
+    return Math.min(...prices);
   }
 }

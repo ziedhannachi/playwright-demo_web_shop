@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "user-registration-and-login-on-webshop-website;register-a-new-user-and-login-successfully",
+        "id": "compare-prices-between-pc-(desktops)-on-demo-web-shop;compare-prices-of-desktops",
         "keyword": "Scenario",
-        "line": 8,
-        "name": "Register a new user and login successfully",
+        "line": 13,
+        "name": "Compare prices of desktops",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 185867100
+              "duration": 255726499
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1136411000
+              "duration": 1030485299
             }
           },
           {
@@ -40,46 +40,128 @@
             },
             "result": {
               "status": "passed",
-              "duration": 442479499
+              "duration": 1427491800
             }
           },
           {
-            "arguments": [],
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "email",
+                      "{userEmail}"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "password",
+                      "$Z4J2ra!U98h!"
+                    ]
+                  }
+                ]
+              }
+            ],
             "keyword": "When ",
-            "line": 9,
-            "name": "I click on Register link",
+            "line": 7,
+            "name": "I enter valid credentials",
             "match": {
-              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:12"
+              "location": "tests\\steps\\login\\LoginShopSteps.ts:12"
             },
             "result": {
               "status": "passed",
-              "duration": 362645100
+              "duration": 112448099
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 10,
-            "name": "I fill the registration form with valid data",
+            "name": "I click on the Log in button",
             "match": {
-              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:18"
+              "location": "tests\\steps\\login\\LoginShopSteps.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 881844699
+              "duration": 472648799
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 11,
-            "name": "I should see registration success message",
+            "name": "I verify that I am redirected to the homepage with email '{userEmail}'",
             "match": {
-              "location": "tests\\steps\\login\\LoginRegisterSteps.ts:24"
+              "location": "tests\\steps\\login\\LoginShopSteps.ts:34"
             },
             "result": {
               "status": "passed",
-              "duration": 69620199
+              "duration": 64627300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "I navigate to Computers module",
+            "match": {
+              "location": "tests\\steps\\computers\\ComputersStep.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 465221799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I go to Desktops",
+            "match": {
+              "location": "tests\\steps\\computers\\ComputersStep.ts:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 469957300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "I collect the prices of all displayed desktops",
+            "match": {
+              "location": "tests\\steps\\computers\\ComputersStep.ts:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 56563599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I verify that desktop prices can be compared",
+            "match": {
+              "location": "tests\\steps\\computers\\ComputersStep.ts:90"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2077299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "I select the cheapest desktop price",
+            "match": {
+              "location": "tests\\steps\\computers\\ComputersStep.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 795799
             }
           },
           {
@@ -87,7 +169,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 196681300
+              "duration": 343682500
             },
             "embeddings": [
               {
@@ -107,27 +189,27 @@
             "line": 1
           },
           {
-            "name": "@auth",
+            "name": "@pricing",
             "line": 1
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "user-registration-and-login-on-webshop-website",
+    "id": "compare-prices-between-pc-(desktops)-on-demo-web-shop",
     "line": 2,
     "keyword": "Feature",
-    "name": "User registration and login on webShop website",
+    "name": "Compare prices between PC (Desktops) on Demo Web Shop",
     "tags": [
       {
         "name": "@e2e",
         "line": 1
       },
       {
-        "name": "@auth",
+        "name": "@pricing",
         "line": 1
       }
     ],
-    "uri": "tests\\feature\\login\\login-register.feature"
+    "uri": "tests\\feature\\computers\\accessories\\compare-desktop-prices.feature"
   }
 ]

@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import BaseAction from '../../utils/basePage';
-import { AUTH_LOCATORS } from '../../locators/AuthLocators';
+import { AUTH_LOCATORS } from '../../locators/login/AuthLocators';
 
 export class RegisterPage extends BaseAction {
   public generatedEmail!: string;
