@@ -71,3 +71,25 @@ Then('I add the cheapest desktop to the shopping cart', async function () {
   const page = new ComputersPage(this.page!);
   await page.addProductToCartByPrice(PriceStore.selectedDesktopPrice);
 });
+
+
+//cart
+Then('I select the cheapest desktop priceN', async function () {
+  if (!PriceStore.desktopPrices || PriceStore.desktopPrices.length === 0) {
+    throw new Error('No desktop prices collected yet!');
+  }
+  PriceStore.selectedDesktopPrice = Math.min(...PriceStore.desktopPrices);
+  console.log('Selected cheapest desktop price:', PriceStore.selectedDesktopPrice);
+  expect(PriceStore.selectedDesktopPrice).toBeGreaterThan(0);
+});
+
+Then('I add the cheapest desktop to the shopping cartN', async function (this: CustomWorld) {
+  const computersPage = new ComputersPage(this.page!);
+  await computersPage.addProductToCartByPrice(PriceStore.selectedDesktopPrice);
+});
+
+Then('I verify the price in the cart matches the selected priceN', async function (this: CustomWorld) {
+  const computersPage = new ComputersPage(this.page!);
+  await computersPage.goToShoppingCart();
+  await computersPage.verifyPriceInCart(PriceStore.selectedDesktopPrice); 
+});

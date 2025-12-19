@@ -14,7 +14,7 @@ Feature: Verify desktop price in cart
     When I navigate to Computers module
     And I go to Desktops
     Then I collect the prices of all displayed desktops
-    And I select the cheapest desktop price
-    And I add the cheapest desktop to the shopping cart
-    Then I verify the price in the cart matches the selected price
+    And I select the cheapest desktop priceN
+    And I add the cheapest desktop to the shopping cartN
+    Then I verify the price in the cart matches the selected priceN
 

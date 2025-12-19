@@ -113,20 +113,24 @@ public async addProductToCartByPrice(price: number) {
       el => el.textContent?.trim() ?? ''
     );
 
-    const numericPrice = parseFloat(priceText.replace(/[^0-9.,]/g, '').replace(',', '.'));
-
-    // Vérifier si le prix correspond
-    if (numericPrice === price) {
-      // Cliquer sur le bouton "Add to cart" dans ce produit
-      const addButton = await product.$('input[value="Add to cart"]');
-      if (addButton) {
-        await addButton.click();
-        console.log(`Added product with price ${price} to the cart.`);
-        return;
-      }
-    }
+   const numericPrice = parseFloat(priceText.replace(/[^0-9.,]/g, '').replace(',', '.'));
+if (Math.abs(numericPrice - price) < 0.01) { // tolérance de 0.01
+  const addButton = await product.$('input[value="Add to cart"]');
+  if (addButton) {
+    await addButton.click();
+    console.log(`Added product with price ${price} to the cart.`);
+    return;
+  }
+}
   }
 
   throw new Error(`No product found with price ${price}`);
+}
+
+public async verifyPriceInCart(expectedPrice: number) {
+    const priceText = await this.getText('tr:has-text("Total") strong'); // ou le locator correct
+    if (!priceText) throw new Error('Price element not found in cart');
+    const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+    expect(price).toBe(expectedPrice);
 }
 }
