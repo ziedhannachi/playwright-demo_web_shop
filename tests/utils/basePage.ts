@@ -12,10 +12,10 @@ export default class BaseAction {
 
   /* ================= ACTIONS ================= */
 
-  public async clickElements(selector: string) {
-    await this.waitFor(selector);
-    await this.page.click(selector);
-  }
+public async clickElements(selector: string, options?: { force?: boolean }) {
+    await this.waitFor(selector); 
+    await this.page.click(selector, options); 
+}
 
   public async fillText(selector: string, value: string) {
     await this.waitFor(selector);

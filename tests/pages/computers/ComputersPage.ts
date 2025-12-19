@@ -66,19 +66,23 @@ export class ComputersPage extends BaseAction {
     expect(text).toContain('Your order has been successfully processed!');
   }
 
-  public async getDesktopPrices(): Promise<number[]> {
-    await this.page.waitForSelector(COMPUTER_LOCATORS.desktopItems);
+ public async getDesktopPrices(): Promise<number[]> {
+  await this.page.waitForSelector(COMPUTER_LOCATORS.desktopPrice);
 
-    const prices = await this.page.$$eval(
-      `${COMPUTER_LOCATORS.desktopItems} ${COMPUTER_LOCATORS.desktopPrice}`,
-      elements => elements.map(el => {
-        const text = el.textContent?.trim() ?? '';
-        const raw = text.replace(/[^0-9.,]/g, '');
-        return parseFloat(raw.replace(',', '.'));
-      })
-    );
-    return prices;
-  }
+  const prices = await this.page.$$eval(
+    COMPUTER_LOCATORS.desktopPrice,
+    elements => elements.map(el => {
+      const text = el.textContent?.trim() ?? '';
+      const raw = text.replace(/[^0-9.,]/g, '');
+      return parseFloat(raw.replace(',', '.'));
+    })
+  );
+
+  console.log('Collected desktop prices:', prices);
+  return prices;
+}
+
+
 
   public async verifyPricesAreComparable(prices: number[]) {
     expect(prices.length).toBeGreaterThan(1);
@@ -91,4 +95,38 @@ export class ComputersPage extends BaseAction {
   public getCheapestPrice(prices: number[]): number {
     return Math.min(...prices);
   }
+
+  /**
+ * Add a product to the cart by matching its price
+ * @param price number - the price of the product to add
+ */
+public async addProductToCartByPrice(price: number) {
+  await this.page.waitForSelector(COMPUTER_LOCATORS.desktopItems);
+
+  // Récupérer tous les produits
+  const products = await this.page.$$(COMPUTER_LOCATORS.desktopItems);
+
+  for (const product of products) {
+    // Récupérer le prix du produit
+    const priceText = await product.$eval(
+      COMPUTER_LOCATORS.desktopPrice,
+      el => el.textContent?.trim() ?? ''
+    );
+
+    const numericPrice = parseFloat(priceText.replace(/[^0-9.,]/g, '').replace(',', '.'));
+
+    // Vérifier si le prix correspond
+    if (numericPrice === price) {
+      // Cliquer sur le bouton "Add to cart" dans ce produit
+      const addButton = await product.$('input[value="Add to cart"]');
+      if (addButton) {
+        await addButton.click();
+        console.log(`Added product with price ${price} to the cart.`);
+        return;
+      }
+    }
+  }
+
+  throw new Error(`No product found with price ${price}`);
+}
 }

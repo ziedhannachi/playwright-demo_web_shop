@@ -2,8 +2,10 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { ComputersPage } from '../../pages/computers/ComputersPage';
 import { CustomWorld } from '../../utils/custom-world';
+import { PricePage } from '../../pages/PricePage';
+import { PriceStore } from '../../utils/PriceStore';
 
-
+let selectedDesktopPrice: number = 0; 
 let desktopPrices: number[] = [];
 
 /**
@@ -83,20 +85,35 @@ Then('I should see the order confirmation', async function(this: CustomWorld) {
  */
 Then('I collect the prices of all displayed desktops', async function (this: CustomWorld) {
   const computersPage = new ComputersPage(this.page!);
-  desktopPrices = await computersPage.getDesktopPrices();
-  console.log('Collected Prices:', desktopPrices);
+  PriceStore.desktopPrices = await computersPage.getDesktopPrices();
+  console.log('Collected desktop prices:', PriceStore.desktopPrices);
 });
 
 Then('I verify that desktop prices can be compared', async function () {
-  const computersPage = new ComputersPage(this.page!);
-  await computersPage.verifyPricesAreComparable(desktopPrices);
+  const prices = PriceStore.desktopPrices;
+  expect(prices.length).toBeGreaterThan(1);
+  prices.forEach(price => expect(price).toBeGreaterThan(0));
 });
 
-Then('I select the cheapest desktop price', async function () {
+Then('I select the cheapest desktop price for desktop', async function () {
   const computersPage = new ComputersPage(this.page!);
   const cheapestPrice = computersPage.getCheapestPrice(desktopPrices);
 
   console.log('Cheapest desktop price:', cheapestPrice);
   expect(cheapestPrice).toBeGreaterThan(0);
+});
+
+Then('I select the cheapest desktop price', async function () {
+  /*const computersPage = new ComputersPage(this.page!);
+  const cheapestPrice = computersPage.getCheapestPrice(desktopPrices);
+
+  console.log('Cheapest desktop price:', cheapestPrice);
+  expect(cheapestPrice).toBeGreaterThan(0);*/
+
+    const prices = PriceStore.desktopPrices;
+  const minPrice = Math.min(...prices);
+  PriceStore.selectedDesktopPrice = minPrice;
+  console.log('Selected desktop price:', minPrice);
+  expect(minPrice).toBeGreaterThan(0);
 });
 

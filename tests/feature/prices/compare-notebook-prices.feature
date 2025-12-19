@@ -1,5 +1,5 @@
-@e2e @pricing
-Feature: Compare prices between PC (Desktops) on Demo Web Shop
+@e2e @cart1
+Feature: Verify desktop price in cart
 
   Background:
     Given I navigate to webShop website
@@ -10,9 +10,11 @@ Feature: Compare prices between PC (Desktops) on Demo Web Shop
     And I click on the Log in button
     Then I verify that I am redirected to the homepage with email '{userEmail}'
 
-  Scenario: Compare prices of desktops
+  Scenario: Add the cheapest desktop to cart and verify price
     When I navigate to Computers module
     And I go to Desktops
     Then I collect the prices of all displayed desktops
-    And I verify that desktop prices can be compared
-    Then I select the cheapest desktop price for desktop
+    And I select the cheapest desktop price
+    And I add the cheapest desktop to the shopping cart
+    Then I verify the price in the cart matches the selected price
+
