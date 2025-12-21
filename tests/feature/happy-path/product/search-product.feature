@@ -15,5 +15,5 @@ Feature: Login
     When I complete the field with "digital SLR Camera"
     And I click on the button "Search"
     Then The article should display 
-    And  the product price should be at least 500 
+    And  The product price should be at least 500 
     

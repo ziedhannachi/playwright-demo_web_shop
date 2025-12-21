@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 /**
  * @author Zied Hannachi
@@ -12,10 +12,10 @@ export default class BaseAction {
 
   /* ================= ACTIONS ================= */
 
-public async clickElements(selector: string, options?: { force?: boolean }) {
-    await this.waitFor(selector); 
-    await this.page.click(selector, options); 
-}
+  public async clickElements(selector: string, options?: { force?: boolean }) {
+    await this.waitFor(selector);
+    await this.page.click(selector, options);
+  }
 
   public async fillText(selector: string, value: string) {
     await this.waitFor(selector);
@@ -33,6 +33,50 @@ public async clickElements(selector: string, options?: { force?: boolean }) {
 
   public async getPageTitle() {
     return this.page.title();
+  }
+
+  public async hoverElement(selector: string) {
+    await this.waitFor(selector);
+    await this.page.hover(selector);
+  }
+
+  public async selectDropdown(selector: string, value: string) {
+    await this.waitFor(selector);
+    await this.page.selectOption(selector, value);
+  }
+
+  /* ================= PROXY / NETWORK ================= */
+
+  /**
+   * Navigate through a proxy by modifying the page URL.
+   * @param url string - target URL
+   * @param proxy string - proxy host:port
+   */
+  public async navigateThroughProxy(url: string, proxy?: string) {
+    if (proxy) {
+      // Simple implementation: inject proxy as query param
+      const proxiedUrl = new URL(url);
+      proxiedUrl.searchParams.set('proxy', proxy);
+      await this.page.goto(proxiedUrl.toString());
+    } else {
+      await this.page.goto(url);
+    }
+  }
+
+  /**
+   * Set custom request headers (useful for auth tokens, proxies)
+   */
+  public async setRequestHeaders(headers: Record<string, string>) {
+    await this.page.setExtraHTTPHeaders(headers);
+  }
+
+  /**
+   * Intercept network requests
+   * @param urlOrPattern string - URL or pattern to intercept
+   * @param handler (route) => void - callback for intercepted requests
+   */
+  public async interceptRequests(urlOrPattern: string, handler: (route: any) => void) {
+    await this.page.route(urlOrPattern, handler);
   }
 
   /* ================= RANDOM DATA ================= */

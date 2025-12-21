@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "login;i-search-un-article-from-the-filter",
+        "id": "add-product-to-cart-from-search;search-a-product-and-add-it-to-the-cart",
         "keyword": "Scenario",
-        "line": 14,
-        "name": "I search un article from the filter",
+        "line": 13,
+        "name": "Search a product and add it to the cart",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 269438000
+              "duration": 213746999
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1935144000
+              "duration": 815004700
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 487054299
+              "duration": 385122899
             }
           },
           {
@@ -70,7 +70,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 117695099
+              "duration": 99365100
             }
           },
           {
@@ -83,7 +83,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 439627399
+              "duration": 473144400
             }
           },
           {
@@ -96,59 +96,59 @@
             },
             "result": {
               "status": "passed",
-              "duration": 73555800
+              "duration": 73487100
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 15,
+            "line": 14,
             "name": "I complete the field with \"digital SLR Camera\"",
             "match": {
-              "location": "tests\\steps\\SearchStep.ts:5"
+              "location": "tests\\steps\\products\\SearchProductStep.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 42532299
+              "duration": 42322600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I click on the button \"Search\"",
+            "match": {
+              "location": "tests\\steps\\products\\SearchProductStep.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 573839799
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 16,
-            "name": "I click on the button \"Search\"",
+            "name": "I add the first searched product to the cart",
             "match": {
-              "location": "tests\\steps\\SearchStep.ts:10"
+              "location": "tests\\steps\\products\\SearchProductStep.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 551805600
+              "duration": 844222900
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 17,
-            "name": "The article should display",
+            "name": "The product should be visible in the shopping cart",
             "match": {
-              "location": "tests\\steps\\SearchStep.ts:15"
+              "location": "tests\\steps\\products\\SearchProductStep.ts:43"
             },
             "result": {
               "status": "passed",
-              "duration": 63638799
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 18,
-            "name": "the product price should be at least 500",
-            "match": {
-              "location": "tests\\steps\\SearchStep.ts:20"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 37870699
+              "duration": 506802999
             }
           },
           {
@@ -156,7 +156,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 310701699
+              "duration": 220974300
             },
             "embeddings": [
               {
@@ -172,27 +172,23 @@
         ],
         "tags": [
           {
-            "name": "@product",
+            "name": "@product1",
             "line": 1
-          },
-          {
-            "name": "@login_valid",
-            "line": 13
           }
         ],
         "type": "scenario"
       }
     ],
-    "id": "login",
-    "line": 3,
+    "id": "add-product-to-cart-from-search",
+    "line": 2,
     "keyword": "Feature",
-    "name": "Login",
+    "name": "Add product to cart from search",
     "tags": [
       {
-        "name": "@product",
+        "name": "@product1",
         "line": 1
       }
     ],
-    "uri": "tests\\feature\\product\\search-product.feature"
+    "uri": "tests\\feature\\happy-path\\product\\add-product-to-cart-from-search.feature"
   }
 ]

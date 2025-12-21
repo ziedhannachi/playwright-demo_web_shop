@@ -1,9 +1,9 @@
 import { Given, When, Then, DataTable } from '@cucumber/cucumber';
-import { PricePage } from '../pages/PricePage';
-import { CustomWorld } from '../utils/custom-world';
+import { PricePage } from '../../pages/prices/PricePage';
+import { CustomWorld } from '../../utils/custom-world';
 import { expect } from '@playwright/test';
-import { PriceStore } from '../utils/PriceStore';
-import { ComputersPage } from '../pages/computers/ComputersPage';
+import { PriceStore } from '../../utils/PriceStore';
+import { ComputersPage } from '../../pages/computers/ComputersPage';
 
 /**
  * Variables partagées

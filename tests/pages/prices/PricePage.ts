@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
-import BaseAction from '../utils/basePage';
-import { PRICE_LOCATORS } from '../locators/PriceLocators';
+import BaseAction from '../../utils/basePage';
+import { PRICE_LOCATORS } from '../../locators/prices/PriceLocators';
 
 export class PricePage extends BaseAction {
     constructor(page: Page) {

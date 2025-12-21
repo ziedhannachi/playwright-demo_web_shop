@@ -2,7 +2,7 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { ComputersPage } from '../../pages/computers/ComputersPage';
 import { CustomWorld } from '../../utils/custom-world';
-import { PricePage } from '../../pages/PricePage';
+import { PricePage } from '../../pages/prices/PricePage';
 import { PriceStore } from '../../utils/PriceStore';
 
 let selectedDesktopPrice: number = 0; 
