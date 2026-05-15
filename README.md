@@ -80,7 +80,7 @@ git clone https://github.com/ziedhannachi/playwright-demo_web_shop.git
 
 - Install dependencies
   - npm init -y
-  - npm install --save-dev @playwright/test
+  - npm init playwright@latest
   - npx playwright install
 
 - Installer Cucumber avec TypeScript
